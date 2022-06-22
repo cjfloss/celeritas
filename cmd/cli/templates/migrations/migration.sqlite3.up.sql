@@ -1,0 +1,6 @@
+-- CREATE TABLE some_table (
+--     id integer not null primary key autoincrement,
+--     some_field VARCHAR ( 255 ) NOT NULL,
+--     created_at datetime NOT NULL DEFAULT (DATETIME('now')),
+--     updated_at datetime NOT NULL DEFAULT (DATETIME('now'))
+-- );
