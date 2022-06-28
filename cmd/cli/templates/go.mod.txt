@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/CloudyKit/jet/v6 v6.1.0
-	github.com/cjfloss/celeritas v1.0.0
+	github.com/cjfloss/celeritas v1.0.1
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/justinas/nosurf v1.1.1
 )
