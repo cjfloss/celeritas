@@ -3,7 +3,7 @@ package main
 func doMigrate(arg2, arg3 string) error {
 	dsn := getDSN()
 
-	// run migrations command
+	// run the migration command
 	switch arg2 {
 	case "up":
 		err := cel.MigrateUp(dsn)

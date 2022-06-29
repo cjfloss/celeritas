@@ -50,7 +50,7 @@ func doMake(arg2, arg3 string) error {
 			exitGracefully(errors.New(fileName + " already exists!"))
 		}
 
-		data, err := templatesFS.ReadFile("templates/handlers/handler.go.txt")
+		data, err := templateFS.ReadFile("templates/handlers/handler.go.txt")
 		if err != nil {
 			exitGracefully(err)
 		}
@@ -66,7 +66,8 @@ func doMake(arg2, arg3 string) error {
 		if arg3 == "" {
 			exitGracefully(errors.New("you must give the model a name"))
 		}
-		data, err := templatesFS.ReadFile("templates/data/model.go.txt")
+
+		data, err := templateFS.ReadFile("templates/data/model.go.txt")
 		if err != nil {
 			exitGracefully(err)
 		}

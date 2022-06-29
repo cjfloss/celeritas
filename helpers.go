@@ -78,8 +78,8 @@ func (e *Encryption) Encrypt(text string) (string, error) {
 	return base64.URLEncoding.EncodeToString(ciphertext), nil
 }
 
-func (e *Encryption) Decrypt(text string) (string, error) {
-	ciphertext, _ := base64.URLEncoding.DecodeString(text)
+func (e *Encryption) Decrypt(cryptoText string) (string, error) {
+	ciphertext, _ := base64.URLEncoding.DecodeString(cryptoText)
 
 	block, err := aes.NewCipher(e.Key)
 	if err != nil {

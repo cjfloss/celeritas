@@ -63,10 +63,10 @@ func getDSN() string {
 }
 
 func showHelp() {
-	color.Yellow(`Avaliable commands:
+	color.Yellow(`Available commands:
 
 	help                  - show the help commands
-	version               - print the application version
+	version               - print application version
 	migrate               - runs all up migrations that have not been run previously
 	migrate down          - reverses the most recent migration
 	migrate reset         - runs all down migrations in reverse order, and then all up migrations
@@ -75,8 +75,8 @@ func showHelp() {
 	make handler <name>   - creates a stub handler in the handlers directory
 	make model <name>     - creates a new model in the data directory
 	make session          - creates a table in the database as a session store
-	make mail             - creates two starter mail templates in the mail directory
-
+	make mail <name>      - creates two starter mail templates in the mail directory
+	
 	`)
 }
 

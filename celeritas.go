@@ -74,7 +74,7 @@ type config struct {
 func (c *Celeritas) New(rootPath string) error {
 	pathConfig := initPaths{
 		rootPath:    rootPath,
-		folderNames: []string{"handlers", "migrations", "views", "data", "public", "tmp", "logs", "middleware"},
+		folderNames: []string{"handlers", "migrations", "views", "mail", "data", "public", "tmp", "logs", "middleware"},
 	}
 
 	err := c.Init(pathConfig)
@@ -292,7 +292,7 @@ func (c *Celeritas) createMailer() mailer.Mail {
 		Host:        os.Getenv("SMTP_HOST"),
 		Port:        port,
 		Username:    os.Getenv("SMTP_USERNAME"),
-		Passsword:   os.Getenv("SMTP_PASSWORD"),
+		Password:    os.Getenv("SMTP_PASSWORD"),
 		Encryption:  os.Getenv("SMTP_ENCRYPTION"),
 		FromName:    os.Getenv("SMTP_FROM_NAME"),
 		FromAddress: os.Getenv("SMTP_FROM_ADDRESS"),
@@ -361,7 +361,7 @@ func (c *Celeritas) BuildDSN() string {
 			os.Getenv("DATABASE_NAME"),
 			os.Getenv("DATABASE_SSL_MODE"))
 
-		// we check to see if a database passsword has been supplied, since including "password=" with nothing
+		// we check to see if a database password has been supplied, since including "password=" with nothing
 		// after it sometimes causes postgres to fail to allow a connection.
 		if os.Getenv("DATABASE_PASS") != "" {
 			dsn = fmt.Sprintf("%s password=%s", dsn, os.Getenv("DATABASE_PASS"))

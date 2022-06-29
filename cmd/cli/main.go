@@ -40,7 +40,7 @@ func main() {
 		if err != nil {
 			exitGracefully(err)
 		}
-		message = "Migrations complete"
+		message = "Migrations complete!"
 
 	case "make":
 		if arg2 == "" {

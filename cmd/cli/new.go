@@ -19,16 +19,16 @@ func doNew(appName string) {
 
 	// sanitize the application name (convert url to single word)
 	if strings.Contains(appName, "/") {
-		exploded := strings.Split(appName, "/")
+		exploded := strings.SplitAfter(appName, "/")
 		appName = exploded[(len(exploded) - 1)]
 	}
 
 	log.Println("App name is", appName)
 
 	// git clone the skeleton application
-	color.Green("\tClonning repository...")
+	color.Green("\tCloning repository...")
 	_, err := git.PlainClone("./"+appName, false, &git.CloneOptions{
-		URL:      "git@github.com:cjfloss/celeritas-app.git",
+		URL:      "https://github.com/cjfloss/celeritas-app.git",
 		Progress: os.Stdout,
 		Depth:    1,
 	})
@@ -43,7 +43,7 @@ func doNew(appName string) {
 
 	// create a ready to go .env file
 	color.Yellow("\tCreating .env file...")
-	data, err := templatesFS.ReadFile("templates/env.template")
+	data, err := templateFS.ReadFile("templates/env.template")
 	if err != nil {
 		exitGracefully(err)
 	}
@@ -63,7 +63,7 @@ func doNew(appName string) {
 	color.Yellow("\tCreating go.mod file...")
 	_ = os.Remove("./" + appName + "/go.mod")
 
-	data, err = templatesFS.ReadFile("templates/go.mod.txt")
+	data, err = templateFS.ReadFile("templates/go.mod.txt")
 	if err != nil {
 		exitGracefully(err)
 	}
@@ -78,7 +78,10 @@ func doNew(appName string) {
 
 	// update existing .go files with correct name/imports
 	color.Yellow("\tUpdating source files...")
-	os.Chdir("./" + appName)
+	err = os.Chdir("./" + appName)
+	if err != nil {
+		exitGracefully(err)
+	}
 	updateSource()
 
 	// run go mod tidy in the project directory
@@ -89,6 +92,6 @@ func doNew(appName string) {
 		exitGracefully(err)
 	}
 
-	color.Green("Done Building " + appURL)
-	color.Green("Go Build Something Awesome")
+	color.Green("Done building " + appURL)
+	color.Green("Go build something awesome")
 }

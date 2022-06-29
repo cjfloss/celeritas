@@ -37,8 +37,6 @@ type TemplateData struct {
 	Flash           string
 }
 
-//TODO(cleiton): Cache templates, possibly with virtual file system
-
 func (c *Render) defaultData(td *TemplateData, r *http.Request) *TemplateData {
 	td.Secure = c.Secure
 	td.ServerName = c.ServerName

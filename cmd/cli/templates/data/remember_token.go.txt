@@ -18,11 +18,11 @@ func (t *RememberToken) Table() string {
 	return "remember_tokens"
 }
 
-func (t *RememberToken) InsertToken(UserID int, token string) error {
+func (t *RememberToken) InsertToken(userID int, token string) error {
 	collection := upper.Collection(t.Table())
 
 	rememberToken := RememberToken{
-		UserID:        UserID,
+		UserID:        userID,
 		RememberToken: token,
 		CreatedAt:     time.Now(),
 		UpdatedAt:     time.Now(),
@@ -38,7 +38,6 @@ func (t *RememberToken) InsertToken(UserID int, token string) error {
 func (t *RememberToken) Delete(rememberToken string) error {
 	collection := upper.Collection(t.Table())
 	res := collection.Find(up.Cond{"remember_token": rememberToken})
-
 	err := res.Delete()
 	if err != nil {
 		return err

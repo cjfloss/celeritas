@@ -81,6 +81,6 @@ func (v *Validation) IsDateISO(field, value string) {
 
 func (v *Validation) NoSpaces(field, value string) {
 	if govalidator.HasWhitespace(value) {
-		v.AddError(field, "Spaces are not permited")
+		v.AddError(field, "Spaces are not permitted")
 	}
 }

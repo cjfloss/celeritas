@@ -37,7 +37,7 @@ func TestMail_SendUsingChan(t *testing.T) {
 		t.Error(errors.New("failed to send over channel"))
 	}
 
-	msg.To = "invalid_to_address"
+	msg.To = "not_an_email_address"
 	mailer.Jobs <- msg
 	res = <-mailer.Results
 	if res.Error == nil {
@@ -120,7 +120,7 @@ func TestMail_send(t *testing.T) {
 
 	err = mailer.Send(msg)
 	if err == nil {
-		t.Error("did not ge an error when we should have")
+		t.Error("did not not get an error when we should have")
 	}
 
 	mailer.API = ""

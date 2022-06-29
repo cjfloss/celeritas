@@ -8,15 +8,14 @@ import (
 )
 
 //go:embed templates
-var templatesFS embed.FS
+var templateFS embed.FS
 
 func copyFileFromTemplate(templatePath, targetFile string) error {
-	//TODO: check to ensure file does not already exist
 	if fileExists(targetFile) {
 		return errors.New(targetFile + " already exists!")
 	}
 
-	data, err := templatesFS.ReadFile(templatePath)
+	data, err := templateFS.ReadFile(templatePath)
 	if err != nil {
 		exitGracefully(err)
 	}
@@ -42,5 +41,4 @@ func fileExists(fileToCheck string) bool {
 		return false
 	}
 	return true
-
 }

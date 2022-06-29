@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func (m *Middleware) CheckRememeber(next http.Handler) http.Handler {
+func (m *Middleware) CheckRemember(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !m.App.Session.Exists(r.Context(), "userID") {
 			// user is not logged in
@@ -32,18 +32,17 @@ func (m *Middleware) CheckRememeber(next http.Handler) http.Handler {
 						m.App.Session.Put(r.Context(), "error", "You've been logged out from another device")
 						next.ServeHTTP(w, r)
 					} else {
-						//validHash, so log the user in
+						// valid hash, so log the user in
 						user, _ := u.Get(id)
 						m.App.Session.Put(r.Context(), "userID", user.ID)
 						m.App.Session.Put(r.Context(), "remember_token", hash)
 						next.ServeHTTP(w, r)
 					}
 				} else {
-					// key longth is zero, so it's probally a leftover cookie (user has not closed browser)
+					// key length is zero, so it's probably a leftover cookie (user has not closed browser)
 					m.deleteRememberCookie(w, r)
 					next.ServeHTTP(w, r)
 				}
-
 			}
 		} else {
 			// user is logged in
@@ -69,7 +68,7 @@ func (m *Middleware) deleteRememberCookie(w http.ResponseWriter, r *http.Request
 
 	http.SetCookie(w, &newCookie)
 
-	//log the user out
+	// log the user out
 	m.App.Session.Remove(r.Context(), "userID")
 	m.App.Session.Destroy(r.Context())
 	_ = m.App.Session.RenewToken(r.Context())

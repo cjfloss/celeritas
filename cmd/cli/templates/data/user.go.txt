@@ -4,9 +4,8 @@ import (
 	"errors"
 	"time"
 
-	"golang.org/x/crypto/bcrypt"
-
 	up "github.com/upper/db/v4"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // User is the type for a user
